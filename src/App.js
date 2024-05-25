@@ -1,58 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Header from './components/Header';
+import LandingPage from './pages/LandingPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
+import ShoppingCartPage from './pages/ShoppingCartPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Container>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/products/:id" component={ProductDetailsPage} />
+          <Route path="/products" component={ProductsPage} />
+          <Route path="/cart" component={ShoppingCartPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Container>
+    </Router>
   );
-}
+};
 
 export default App;
